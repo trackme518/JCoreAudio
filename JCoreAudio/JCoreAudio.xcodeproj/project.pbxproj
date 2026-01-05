@@ -12,7 +12,6 @@
 		90224B76157A959000DDB959 /* ch_section6_jcoreaudio_JCoreAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 90224B73157A959000DDB959 /* ch_section6_jcoreaudio_JCoreAudio.h */; };
 		904C095E156C11DA00017CC2 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 904C095D156C11DA00017CC2 /* CoreAudio.framework */; };
 		908730DB156AC9220011F922 /* JCoreAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 908730DA156AC9220011F922 /* JCoreAudio.m */; };
-		908730E2156ACF0C0011F922 /* JavaVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908730E1156ACF0C0011F922 /* JavaVM.framework */; };
 		908730E4156ACF370011F922 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908730E3156ACF370011F922 /* Foundation.framework */; };
 		908730EE156AD0E80011F922 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908730ED156AD0E80011F922 /* CoreServices.framework */; };
 		908730F2156AD3B60011F922 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908730F1156AD3B60011F922 /* AudioUnit.framework */; };
@@ -23,7 +22,7 @@
 		90224B72157A959000DDB959 /* ch_section6_jcoreaudio_AudioLet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ch_section6_jcoreaudio_AudioLet.h; sourceTree = "<group>"; };
 		90224B73157A959000DDB959 /* ch_section6_jcoreaudio_JCoreAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ch_section6_jcoreaudio_JCoreAudio.h; sourceTree = "<group>"; };
 		904C095D156C11DA00017CC2 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		908730CD156AC9220011F922 /* libJCoreAudio.jnilib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libJCoreAudio.jnilib; sourceTree = BUILT_PRODUCTS_DIR; };
+		908730CD156AC9220011F922 /* JCoreAudio.jnilib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = JCoreAudio.jnilib; sourceTree = BUILT_PRODUCTS_DIR; };
 		908730D8156AC9220011F922 /* JCoreAudio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JCoreAudio-Prefix.pch"; sourceTree = "<group>"; };
 		908730DA156AC9220011F922 /* JCoreAudio.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCoreAudio.m; sourceTree = "<group>"; };
 		908730E1156ACF0C0011F922 /* JavaVM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaVM.framework; path = System/Library/Frameworks/JavaVM.framework; sourceTree = SDKROOT; };
@@ -41,7 +40,6 @@
 				908730F2156AD3B60011F922 /* AudioUnit.framework in Frameworks */,
 				908730EE156AD0E80011F922 /* CoreServices.framework in Frameworks */,
 				908730E4156ACF370011F922 /* Foundation.framework in Frameworks */,
-				908730E2156ACF0C0011F922 /* JavaVM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +58,7 @@
 		908730CE156AC9220011F922 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				908730CD156AC9220011F922 /* libJCoreAudio.jnilib */,
+				908730CD156AC9220011F922 /* JCoreAudio.jnilib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,7 +125,7 @@
 			);
 			name = JCoreAudio;
 			productName = JCoreAudio;
-			productReference = 908730CD156AC9220011F922 /* libJCoreAudio.jnilib */;
+			productReference = 908730CD156AC9220011F922 /* JCoreAudio.jnilib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -144,6 +142,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 908730C2156AC9210011F922;
@@ -222,24 +221,40 @@
 		908730DF156AC9220011F922 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_EXTENSION = jnilib;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JCoreAudio/JCoreAudio-Prefix.pch";
-				PRODUCT_NAME = libJCoreAudio;
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home/include",
+					"/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home/include/darwin",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = JCoreAudio;
+				"SEPARATE_STRIP[arch=*]" = "JAVA_HOME = /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home";
 			};
 			name = Debug;
 		};
 		908730E0156AC9220011F922 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_EXTENSION = jnilib;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JCoreAudio/JCoreAudio-Prefix.pch";
-				PRODUCT_NAME = libJCoreAudio;
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home/include",
+					"/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home/include/darwin",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				PRODUCT_NAME = JCoreAudio;
+				SEPARATE_STRIP = NO;
+				"SEPARATE_STRIP[arch=*]" = "JAVA_HOME = /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home";
 			};
 			name = Release;
 		};
